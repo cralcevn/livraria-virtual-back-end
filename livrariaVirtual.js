@@ -5,6 +5,8 @@ const cors = require ("cors") // aqui estou trazendo o pacote cors que permite c
 const conectaBancoDeDados = require ("./BancoDeDados") // ligando ao arquivo bancoDeDados
 conectaBancoDeDados()
 
+const Livro = require("./livroModel")
+
 const app = express() // aqui estou iniciando o app
 app.use(express.json())
 app.use (cors())
@@ -45,21 +47,22 @@ async function corrigeLivro(request, response){
         const livroEncontrado = await Livro.findById(request.params.id)
         
         if (request.body.categoria){
-            mulherEncontrada.categoria = request.body.categoria
+            livroEncontrada.categoria = request.body.categoria
         }
     
         if (request.body.nome){
-            mulherEncontrada.nome = request.body.nome
+            livroEncontrada.nome = request.body.nome
         }
     
         if (request.body.sinopse){
-            mulherEncontrada.sinopse = request.body.sinopse
+            livroEncontrada.sinopse = request.body.sinopse
         }
 
         if (request.body.sumário){
-            mulherEncontrada.sumário = request.body.sumário
+            livroEncontrada.sumário = request.body.sumário
         }
-               response.json()
+        const livroAtualizadoNoBancoDeDados = await livroEncontrado.save()
+        response.json(livroAtualizadoNoBancoDeDados)
 
 
     } catch (erro) {
