@@ -47,19 +47,19 @@ async function corrigeLivro(request, response){
         const livroEncontrado = await Livro.findById(request.params.id)
         
         if (request.body.categoria){
-            livroEncontrada.categoria = request.body.categoria
+            livroEncontrado.categoria = request.body.categoria
         }
     
         if (request.body.nome){
-            livroEncontrada.nome = request.body.nome
+            livroEncontrado.nome = request.body.nome
         }
     
         if (request.body.sinopse){
-            livroEncontrada.sinopse = request.body.sinopse
+            livroEncontrado.sinopse = request.body.sinopse
         }
 
         if (request.body.sumário){
-            livroEncontrada.sumário = request.body.sumário
+            livroEncontrado.sumário = request.body.sumário
         }
         const livroAtualizadoNoBancoDeDados = await livroEncontrado.save()
         response.json(livroAtualizadoNoBancoDeDados)
