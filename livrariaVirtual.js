@@ -1,12 +1,13 @@
 const express = require("express") // aqui estou iniciando o express
 const router = express.Router() // aqui estou configurando a primeira parte da rota
-const {v4: uuidv4}  = require ("uuid")
+const cors = require ("cors") // aqui estou trazendo o pacote cors que permite consumir essa api no fornt-end
 
 const conectaBancoDeDados = require ("./BancoDeDados") // ligando ao arquivo bancoDeDados
 conectaBancoDeDados()
 
 const app = express() // aqui estou iniciando o app
 app.use(express.json())
+app.use (cors())
 const porta = 8080 // aqui estou criando a porta
 
 // GET
