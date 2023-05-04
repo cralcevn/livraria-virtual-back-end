@@ -1,15 +1,13 @@
 const express = require("express") // aqui estou iniciando o express
 const router = express.Router() // aqui estou configurando a primeira parte da rota
-const cors = require ("cors") // aqui estou trazendo o pacote cors que permite consumir essa api no fornt-end
 
-const conectaBancoDeDados = require ("./BancoDeDados") // ligando ao arquivo bancoDeDados
+const conectaBancoDeDados = require ("./bancoDeDados") // ligando ao arquivo bancoDeDados
 conectaBancoDeDados()
 
 const Livro = require("./livroModel")
 
 const app = express() // aqui estou iniciando o app
 app.use(express.json())
-app.use (cors())
 const porta = 8080 // aqui estou criando a porta
 
 // GET
@@ -75,7 +73,7 @@ async function corrigeLivro(request, response){
  async function deletaLivro (request, response) {
     
     try {
-        await Livro.findByIdAndDelete(request.params.id)
+        await livro.findByIdAndDelete(request.params.id)
         response.json({message:"Livro deletado com sucesso!"})
     } catch (erro) {
         console.log(erro)
@@ -83,10 +81,10 @@ async function corrigeLivro(request, response){
 
  }
 
-app.use(router.get("/livro", mostraLivro)) // configurei rota GET /livro
-app.use(router.post("/livro", criaLivro)) //  configurei rota POST/livro
-app.use(router.patch("/livro/:id", corrigeLivro)) // configurei a rota PATCH / livro/ :id
-app.use(router.delete("/livro/:id", deletaLivro)) // configurei rota DELETE /livro
+app.use(router.get("/livros", mostraLivro)) // configurei rota GET /livro
+app.use(router.post("/livros", criaLivro)) //  configurei rota POST/livro
+app.use(router.patch("/livros/:id", corrigeLivro)) // configurei a rota PATCH / livro/ :id
+app.use(router.delete("/livros/:id", deletaLivro)) // configurei rota DELETE /livro
 
 //PORTA
 function mostraPorta () {

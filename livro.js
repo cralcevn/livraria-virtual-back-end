@@ -4,7 +4,7 @@ const router = express.Router()
 const app = express()
 const porta = 8080
 
-function mostraLivros(request, response){
+function mostraLivro(request, response){
     response.json ({
         categoria: "psicologia",
         nome: "A coragem de não agradar",
@@ -17,5 +17,5 @@ function mostraPorta () {
     console.log ("Servidor criado e rodando na porta ", porta)
 }
 
-app.use(router.get("/livro", mostraLivros))
+app.use(router.get("/livro", mostraLivro))
 app.listen(porta, mostraPorta)
